@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.template import loader
 
 def home(request):
     users = User.objects.order_by('id')
-    template = loader.get_template('appone/templates/home')
+    template = loader.get_template('home.html')
     
     context = {
         'users' : users
