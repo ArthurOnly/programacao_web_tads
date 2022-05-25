@@ -2,4 +2,13 @@
 
 {% block content %}
 <h1>{{ question }}</h1>
+<h2>Alternativas</h2>
+<ul>
+{%for choice in question.choice_set.all %}
+    <li>{{ choice }}</li>
+{% endfor %}
+</ul>
+<a href="{% url 'questions_index' %}">Voltar</a>
+<a href="{% url 'questions_vote' question.id %}">Votar</a>
+<a href="{% url 'questions_result' question.id %}">Resultados</a>
 {% endblock %}

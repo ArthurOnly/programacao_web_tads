@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ question }}</h1>
+<h2>Alternativas</h2>
+<ul>
+{%for choice in question.choice_set.all %}
+    <li>{{ choice }} - {{ choice.votes }}</li>
+{% endfor %}
+</ul>
+<a href="{% url 'questions_show' question.id %}">Voltar</a>
+{% endblock %}

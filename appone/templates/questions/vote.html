@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ question }}</h1>
+<h2>Alternativas</h2>
+<form method="post" action="{% url 'questions_vote_post' question.id %}">
+{% csrf_token %}
+{%for choice in question.choice_set.all %}
+    <input type="radio" name="choice_id" value="{{ choice.id }}">{{ choice }}</input>
+{% endfor %}
+<button type="submit">Votar</button>
+</form>
+<a href="{% url 'questions_show' question.id %}">Voltar</a>
+{% endblock %}
