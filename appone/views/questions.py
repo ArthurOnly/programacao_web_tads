@@ -4,7 +4,7 @@ from django.template import loader
 from django.shortcuts import redirect
 
 def index(request):
-    questions = Question.objects.order_by('id')
+    questions = Question.objects.order_by('-pub_date')[:25]
     template = loader.get_template('questions/index.html')
     
     context = {
@@ -34,7 +34,7 @@ def vote_post(request, id):
     choice = Choice.objects.get(pk = request.POST['choice_id'])
     choice.votes +=1
     choice.save()
-    return redirect('questions_index')
+    return redirect('questions_result', choice.question.id)
 
 def result(request, id):
     question = Question.objects.get(id=id)

@@ -1,9 +1,12 @@
 from django.urls import path
+from django.shortcuts import redirect
 
 import appone.views.questions as question_views
 import appone.views.auth as auth_views
 
 urlpatterns = [
+    path('', lambda request: redirect('questions_index', permanent=True)),
+
     path('questions', question_views.index, name='questions_index'),
     path('questions/<int:id>', question_views.show, name='questions_show'),
     path('questions/<int:id>/vote', question_views.vote, name='questions_vote'),
