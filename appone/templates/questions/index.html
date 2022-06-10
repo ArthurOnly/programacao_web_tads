@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container bg-white p-8 shadow mx-auto rounded mt-4">
+    <h1 class="font-bold text-2xl text-gray-800">15 enquetes mais recentes</h1>
+    <ul class="mt-8">
+        {% for question in questions %}
+        <li class="p-4 w-100 border-b border-gray-200 flex justify-between">
+            <a href="{% url 'questions_show' question.id %}">{{ question }}</a>
+            <div class="flex gap-4 text-blue-500">
+                <a href="{% url 'questions_show' question.id %}">Acessar</a>
+                <a href="{% url 'questions_vote' question.id %}">Votar</a>
+                <a href="{% url 'questions_result' question.id %}">Ver resultados</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

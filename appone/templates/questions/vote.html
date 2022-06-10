@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container bg-white p-8 shadow mx-auto rounded mt-4">
+    <h1>{{ question }}</h1>
+
+    <div class="mt-4">
+        <h2>Alternativas</h2>
+        <form method="post" action="{% url 'questions_vote_post' question.id %}">
+        <div class="flex gap-4 items-center">
+        {% csrf_token %}
+        {%for choice in question.choice_set.all %}
+            <input type="radio" name="choice_id" value="{{ choice.id }}">{{ choice }}</input>
+        {% endfor %}
+        </div>
+        <button type="submit" class="p-2 text-white bg-blue-700 mt-4">Votar</button>
+        </form>
+    </div>
+    <a href="{% url 'questions_show' question.id %}" class="mt-4">Voltar</a>
+</section>
+{% endblock %}

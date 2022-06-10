@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container bg-white p-8 shadow mx-auto rounded mt-4">
+    <h1 class="font-bold text-2xl text-gray-800">{{ question }}</h1>
+    
+    <div class="mt-4 flex flex-col gap-4">
+        <h1>Data de publicação: {{ question.pub_date }}</h1>
+        <div>
+            <h2>Alternativas</h2>
+            <ul class="flex gap-8">
+                {%for choice in question.choice_set.all %}
+                    <li>{{ choice }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-4 flex gap-4 text-blue-500">
+        <a href="{% url 'questions_index' %}">Voltar</a>
+        <a href="{% url 'questions_vote' question.id %}">Votar</a>
+        <a href="{% url 'questions_result' question.id %}">Resultados</a>
+    </div>
+</section>
+{% endblock %}
